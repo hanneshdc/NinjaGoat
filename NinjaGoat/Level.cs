@@ -47,14 +47,29 @@ namespace NinjaGoat
             int minX = (int)min.X, minY = (int)min.Y;
             int maxX = (int)max.X, maxY = (int)max.Y;
 
+            if (maxX == max.X) maxX--;
+            if (maxY == max.Y) maxY--;
+
             for (int x = minX; x <= maxX; x++)
                 for (int y = minY; y <= maxY; y++)
                 {
-                    if(x > 
+                    if (x >= width || x < 0 || y >= height || y < 0)
+                        continue;
                     if (levelWalls[x, y])
                         return true;
                 }
             return false;
+        }
+
+        public bool Touching(Vector2 point)
+        {
+            int x = (int)point.X;
+            int y = (int)point.Y;
+
+            if (x >= width || x < 0 || y >= height || y < 0)
+                return false;
+
+            return levelWalls[x, y];
         }
     }
 }

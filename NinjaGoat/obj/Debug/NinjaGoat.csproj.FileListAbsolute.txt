@@ -8,3 +8,4 @@ C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\OpenTK.pdb
 C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\OpenTK.xml
 C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\level1.bmp
 C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\level2.bmp
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\obj\Debug\NinjaGoat.csprojResolveAssemblyReference.cache
