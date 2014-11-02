@@ -1,0 +1,10 @@
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\NinjaGoat.exe.config
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\NinjaGoat.exe
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\NinjaGoat.pdb
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\obj\Debug\NinjaGoat.exe
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\obj\Debug\NinjaGoat.pdb
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\OpenTK.dll
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\OpenTK.pdb
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\OpenTK.xml
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\level1.bmp
+C:\Users\Hannes\Documents\GitHub\NinjaGoat\NinjaGoat\bin\Debug\level2.bmp
