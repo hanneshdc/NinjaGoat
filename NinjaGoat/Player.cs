@@ -118,7 +118,16 @@ namespace NinjaGoat
             else
                 velocity.X *= airDrag;
 
-            Window.Renderer.cameraPosition = Position;
+            if(Position.Y-Window.Renderer.cameraPosition.Y > 5)
+            {
+                Window.Renderer.cameraPosition.Y = Position.Y -5;
+            }
+            if(Window.Renderer.cameraPosition.Y-Position.Y > 5)
+            {
+                Window.Renderer.cameraPosition.Y = Position.Y +5;
+            }
+
+            Window.Renderer.cameraPosition.X = Position.X;
             oldKeyState = keystate;
         }
     }
