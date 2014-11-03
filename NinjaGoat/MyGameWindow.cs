@@ -18,7 +18,7 @@ namespace NinjaGoat
         public Entity player;
         public Level currentLevel;
 
-        const float DT = 1 / 60f;
+        public const float DT = 1 / 60f;
 
         
 

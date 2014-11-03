@@ -11,7 +11,7 @@ namespace NinjaGoat
     class Renderer
     {
         public Vector2 cameraPosition;
-        float worldHeight = 20;
+        float worldHeight = 5;
         int vertexBuffer, indexBuffer;
         GameWindow GameWindow;
 

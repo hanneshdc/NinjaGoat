@@ -14,18 +14,28 @@ namespace NinjaGoat
         {
             Flying,
             Grounded,
-            Walled
+            WalledLeft,
+            WalledRight,
         }
 
         Vector2 velocity;
         State state;
 
-        const float MAX_SPEED = 10;
-        const float JUMP_HEIGHT = 4;
-        const float GRAVITY = 30;
-        const float AIR_CONTROL = 0.1f;
+        KeyboardState oldKeyState;
 
-        
+        // Player characteristics
+        const float MAX_SPEED = 15;
+        const float JUMP_HEIGHT = 5;
+        const float GRAVITY = 70;
+        const float RESPONSE_TIME_GROUND = 0.1f;
+        const float RESPONSE_TIME_AIR = 0.1f;
+
+        // Computed parameters
+        static float groundDrag = (float)Math.Exp(-MyGameWindow.DT / RESPONSE_TIME_GROUND);
+        static float airDrag = (float)Math.Exp(-MyGameWindow.DT / RESPONSE_TIME_AIR);
+        static float groundAcc = MAX_SPEED * (1 - groundDrag) / groundDrag;
+        static float airAcc = MAX_SPEED * (1 - airDrag) / airDrag;
+        static float jumpVel = (float)Math.Sqrt(2 * GRAVITY * JUMP_HEIGHT);
 
         public Player(MyGameWindow window)
             : base(window)
@@ -36,21 +46,37 @@ namespace NinjaGoat
 
         public override void Update()
         {
+            
+            var keystate = OpenTK.Input.Keyboard.GetState();
+            if (oldKeyState == null)
+                oldKeyState = keystate;
+
             Vector2 p00 = Position;
             Vector2 p10 = Position + Scale * Vector2.UnitX;
             Vector2 p01 = Position + Scale * Vector2.UnitY;
             Vector2 p11 = Position + Scale;
 
-            if (Window.Keyboard[Key.Left])
-                velocity.X -= DT * 100;
+            float dVX = 0;
+            if (keystate[Key.Left]) dVX -= 1;
+            if (keystate[Key.Right]) dVX += 1;
 
-            if (Window.Keyboard[Key.Right])
-                velocity.X += DT * 100;
+            velocity.X += dVX * (state == State.Grounded ? groundAcc : airAcc);
 
-            if (Window.Keyboard[Key.A] && state == State.Grounded)
-                velocity.Y += 15;
 
-            velocity.Y -= DT * 40f;
+            if (keystate[Key.A] && !oldKeyState[Key.A])
+            {
+                if(state != State.Flying)
+                    velocity.Y = jumpVel;
+
+                if (state == State.WalledLeft)
+                    velocity.X = jumpVel;
+
+                if (state == State.WalledRight)
+                    velocity.X = -jumpVel;
+            }
+                
+
+            velocity.Y -= DT * GRAVITY;
 
             if (Window.currentLevel.Touching(this))
                 throw new Exception();
@@ -73,20 +99,27 @@ namespace NinjaGoat
             if (Window.currentLevel.Touching(this))
             {
                 if (velocity.X < 0)
+                {
                     Position.X = (int)Position.X + 1;
+                    if (state == State.Flying)
+                        state = State.WalledLeft;
+                }
                 if (velocity.X > 0)
+                {
                     Position.X = (int)Position.X;
+                    if (state == State.Flying)
+                        state = State.WalledRight;
+                }
                 velocity.X = 0;
-                if (state == State.Flying)
-                    state = State.Walled;
             }
 
             if(state == State.Grounded)
-                velocity *= 0.95f;
+                velocity.X *= groundDrag;
             else
-                velocity *= 0.999f;
+                velocity.X *= airDrag;
 
             Window.Renderer.cameraPosition = Position;
+            oldKeyState = keystate;
         }
     }
 }
